@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">AndroidApp</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="sub_details">guptarahul126@gmail.com</string>
+    <string name="title">Rahul Gupta</string>
+    <string name="scenario_one">Scenario 1</string>
+    <string name="scenario_two">Scenario 2</string>
+
+
+    <string name="defult_time">0 min</string>
+    <string name="title_activity_viewo_on_maps">Location</string>
+    <string name="hz_tv_name_item_one">Pune</string>
+    <string name="hz_tv_name_item_two">Delhi</string>
+    <string name="hz_tv_name_item_three">Mumbai</string>
+    <string name="hz_tv_name_item_four">Chennai</string>
+    <string name="hz_tv_name_item_five">Ahmedabad</string>
+    <string name="point_three_tv_one">TextView one</string>
+    <string name="point_five_btn_text_red">Red Button</string>
+    <string name="point_five_btn_text_green">Green Button</string>
+    <string name="point_five_btn_text_blue">Blue Button</string>
+</resources>
