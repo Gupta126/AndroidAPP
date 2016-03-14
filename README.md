@@ -19,8 +19,8 @@ this Project use Navigation Drawer.
 
 
 the app containts two flavor.
-1. RELEASE
 
+1. RELEASE
 2. DEBUG
 
 check in [build.gradle](https://github.com/Gupta126/AndroidAPP/tree/master/app) file in App folder.
