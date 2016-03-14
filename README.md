@@ -29,8 +29,8 @@ Project also show usage of google map.
 
 this shows publish app in debug mode and release mode for updating google map key. 
 ![Main Screen](https://github.com/Gupta126/AndroidAPP/blob/Gupta126-images/Screenshot_2016-03-14-11-51-16.png)
-![Main Screen]({{site.baseurl}}/https://github.com/Gupta126/AndroidAPP/blob/Gupta126-images/Screenshot_2016-03-14-11-51-32.png)
-![Main Screen]({{site.baseurl}}/https://github.com/Gupta126/AndroidAPP/blob/Gupta126-images/Screenshot_2016-03-14-11-59-02.png)
+![Main Screen](https://github.com/Gupta126/AndroidAPP/blob/Gupta126-images/Screenshot_2016-03-14-11-51-32.png)
+![Main Screen](https://github.com/Gupta126/AndroidAPP/blob/Gupta126-images/Screenshot_2016-03-14-11-59-02.png)
 
 
 
