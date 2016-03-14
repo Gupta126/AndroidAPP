@@ -1,6 +1,7 @@
 # AndroidAPP
 
 This is Android App code, shows usage below listed widgets of android.
+
 1. Viewpager
 2. HorizontalScrollView
 3. TextView
