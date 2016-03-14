@@ -21,6 +21,7 @@ the app containts two flavor.
 check in [build.gradle](https://github.com/Gupta126/AndroidAPP/tree/master/app) file in App folder.
 
 Project also show usage of google map.
+
 this shows publish app in debug mode and release mode for updating google map key.  
 
 
