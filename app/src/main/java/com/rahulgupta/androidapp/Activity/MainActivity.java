@@ -1,6 +1,8 @@
 package com.rahulgupta.androidapp.Activity;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         ScenarioOneFragment.OnFragmentInteractionListener,
         ScenarioTwoFragment.OnFragmentInteractionListener {
+
 
     //Defining Variables
     private Toolbar toolbar;
@@ -60,6 +63,7 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // set default selection
         setdefaultNavigationSelected();
     }
 

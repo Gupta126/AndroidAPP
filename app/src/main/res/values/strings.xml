@@ -22,4 +22,6 @@
     <string name="point_five_btn_text_red">Red Button</string>
     <string name="point_five_btn_text_green">Green Button</string>
     <string name="point_five_btn_text_blue">Blue Button</string>
+
+<string name="google_maps_api_key">AIzaSyCK-kQGEBpfnwoPLqcIGskSb3ZmTm_jcrM</string>
 </resources>
