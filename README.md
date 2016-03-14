@@ -12,7 +12,11 @@ This is Android App code, shows usage below listed widgets of android.
 this project also used [Volly](http://developer.android.com/training/volley/index.html) Library, 
 Volley is an HTTP library that makes networking for Android apps easier and most importantly, faster. 
 
+Also shows usage of [Gson](https://github.com/google/gson) Library for parsing Json data.  
+
 this Project use Navigation Drawer.
+
+
 
 the app containts two flavor.
 1. RELEASE
