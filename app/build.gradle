@@ -17,12 +17,12 @@ android {
             applicationIdSuffix '.replease'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            resValue "string", "google_maps_api_key", "AIzaSyDES3ua8AqGjQvfWRMZ_qfaJqAgdIuA4K4"
+            resValue "string", "google_maps_api_key", "AIzaSyAAbA76VM_IMuVLE7sTqQV6hHkkzcXtEFM"
 
         }
         debug {
             applicationIdSuffix ".debug"
-            resValue "string", "google_maps_api_key", "AIzaSyDES3ua8AqGjQvfWRMZ_qfaJqAgdIuA4K4"
+            resValue "string", "google_maps_api_key", "AIzaSyAAbA76VM_IMuVLE7sTqQV6hHkkzcXtEFM"
         }
 
 

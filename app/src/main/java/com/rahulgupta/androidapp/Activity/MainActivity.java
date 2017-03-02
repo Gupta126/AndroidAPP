@@ -25,9 +25,7 @@ import com.rahulgupta.androidapp.Fragments.ScenarioTwoFragment;
 import com.rahulgupta.androidapp.R;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        ScenarioOneFragment.OnFragmentInteractionListener,
-        ScenarioTwoFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
 
     //Defining Variables
@@ -159,8 +157,4 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 }

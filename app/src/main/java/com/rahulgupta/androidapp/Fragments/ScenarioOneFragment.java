@@ -1,15 +1,16 @@
 package com.rahulgupta.androidapp.Fragments;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,10 +20,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.rahulgupta.androidapp.Adapters.CityAdapter;
 import com.rahulgupta.androidapp.Adapters.ViewPagerAdapter;
 import com.rahulgupta.androidapp.R;
 
 import android.view.ViewGroup.LayoutParams;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +36,7 @@ import android.view.ViewGroup.LayoutParams;
  * Use the {@link ScenarioOneFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ScenarioOneFragment extends Fragment implements View.OnClickListener {
+public class ScenarioOneFragment extends Fragment implements View.OnClickListener,CityAdapter.OnAdapterInteractionListener {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -42,16 +46,19 @@ public class ScenarioOneFragment extends Fragment implements View.OnClickListene
     private String mParam1;
     private String mParam2;
 
+    private RecyclerView city_recycler_view;
     private OnFragmentInteractionListener mListener;
+    private CityAdapter mCityAdapter;
     ViewPager viewPager;
     ViewPagerAdapter adapterViewPager;
     int pagerPadding = 20;
+    private ArrayList<String> cityNamelList;
 
 
     // define components
     private Button mRedBtn, mGreenBtn, mBlueBtn;
-    private LinearLayout mPointFiveLayout, mFourLayout, mMainLayout;
-    private TextView mTvItem1, mTvItem2, mTvItem3, mTvItem4, mTvItem5;
+    private LinearLayout mPointFiveLayout, mAddTextviewLayout, mMainLayout;
+    private TextView mTvPune, mTvDelhi, mTvMumbai, mTvChennai, mTvAhmedabad;
 
 
     final int position = 3;
@@ -83,6 +90,7 @@ public class ScenarioOneFragment extends Fragment implements View.OnClickListene
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        setRetainInstance(true);
     }
 
     @Override
@@ -91,18 +99,39 @@ public class ScenarioOneFragment extends Fragment implements View.OnClickListene
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_scenario_one, container, false);
 
-        setupUIComponent(view);
-
-        setupAdapter();
-
-        setupListners();
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setupUIComponent(view);
+        setupAdapter();
+        setupListners();
+    }
 
     private void setupAdapter() {
         adapterViewPager = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(adapterViewPager);
+
+        cityNamelList=new ArrayList<>();
+        cityNamelList.add("Pune");
+        cityNamelList.add("Delhi");
+        cityNamelList.add("Ahmedabad");
+        cityNamelList.add("Mumbai");
+        cityNamelList.add("Rajkot");
+        cityNamelList.add("Noida");
+        cityNamelList.add("Nagpur");
+        cityNamelList.add("Kola");
+        cityNamelList.add("Agra");
+        cityNamelList.add("Jaipur");
+
+        mCityAdapter=new CityAdapter(cityNamelList,this);
+
+        LinearLayoutManager horizontalLayoutManagaer
+                = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        city_recycler_view.setLayoutManager(horizontalLayoutManagaer);
+        city_recycler_view.setAdapter(mCityAdapter);
 
     }
 
@@ -123,28 +152,23 @@ public class ScenarioOneFragment extends Fragment implements View.OnClickListene
         mGreenBtn = (Button) view.findViewById(R.id.green_btn);
         mBlueBtn = (Button) view.findViewById(R.id.blue_btn);
 
+        mAddTextviewLayout = (LinearLayout) view.findViewById(R.id.addTextviewlayout);
         mPointFiveLayout = (LinearLayout) view.findViewById(R.id.point_five_layout);
 
-        mTvItem1 = (TextView) view.findViewById(R.id.info_text_item_one);
-        mTvItem2 = (TextView) view.findViewById(R.id.info_text_item_two);
-        mTvItem3 = (TextView) view.findViewById(R.id.info_text_item_three);
-        mTvItem4 = (TextView) view.findViewById(R.id.info_text_item_four);
-        mTvItem5 = (TextView) view.findViewById(R.id.info_text_item_five);
+        city_recycler_view = (RecyclerView) view.findViewById(R.id.horizontal_recycler_view);
 
     }
 
 
+    /**
+     * this method setup listners of UI Components.
+     */
     private void setupListners() {
 
         mRedBtn.setOnClickListener(this);
         mGreenBtn.setOnClickListener(this);
         mBlueBtn.setOnClickListener(this);
 
-        mTvItem1.setOnClickListener(this);
-        mTvItem2.setOnClickListener(this);
-        mTvItem3.setOnClickListener(this);
-        mTvItem4.setOnClickListener(this);
-        mTvItem5.setOnClickListener(this);
     }
 
 
@@ -161,8 +185,8 @@ public class ScenarioOneFragment extends Fragment implements View.OnClickListene
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+           /* throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");*/
         }
     }
 
@@ -185,32 +209,17 @@ public class ScenarioOneFragment extends Fragment implements View.OnClickListene
             case R.id.blue_btn:
                 mPointFiveLayout.setBackgroundColor(getColor(R.color.blue_selected));
                 break;
-            case R.id.info_text_item_one:
-                addTextView(mMainLayout, mTvItem1.getText().toString(), position);
-                break;
-
-            case R.id.info_text_item_two:
-                addTextView(mMainLayout, mTvItem2.getText().toString(), position);
-                break;
-
-            case R.id.info_text_item_three:
-                addTextView(mMainLayout, mTvItem3.getText().toString(), position);
-                break;
-
-            case R.id.info_text_item_four:
-                addTextView(mMainLayout, mTvItem4.getText().toString(), position);
-                break;
-            case R.id.info_text_item_five:
-                addTextView(mMainLayout, mTvItem5.getText().toString(), position);
-                break;
-
-
         }
     }
 
 
     private int getColor(int color) {
         return android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP ? ContextCompat.getColor(getActivity(), color) : getActivity().getResources().getColor(color);
+    }
+
+    @Override
+    public void onViewClick(String cityName) {
+        addTextView(mAddTextviewLayout,cityName,position);
     }
 
 
@@ -230,6 +239,12 @@ public class ScenarioOneFragment extends Fragment implements View.OnClickListene
     }
 
 
+    /**
+     * this method initialise all UI Components from view
+     *
+     * @param mainLayout pass linear layout whe it will add new text view.
+     * @param name this param will set textview text.
+     */
     private void addTextView(LinearLayout mainLayout, String name, int position) {
 
         TextView textView = new TextView(getActivity());
@@ -238,8 +253,6 @@ public class ScenarioOneFragment extends Fragment implements View.OnClickListene
         textView.setGravity(Gravity.CENTER);
         textView.setTypeface(Typeface.DEFAULT_BOLD);
         textView.setText(name);
-
-
         LinearLayout layout = new LinearLayout(getActivity());
         layout.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -252,7 +265,8 @@ public class ScenarioOneFragment extends Fragment implements View.OnClickListene
         layout.addView(textView);
 
         // popout to main layout
-        mainLayout.addView(layout, position);
+        mainLayout.removeAllViews();
+        mainLayout.addView(layout);
     }
 
     @Override
@@ -270,25 +284,4 @@ public class ScenarioOneFragment extends Fragment implements View.OnClickListene
         super.onResume();
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
 }
