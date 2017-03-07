@@ -74,8 +74,6 @@ public class MainActivity extends AppCompatActivity
 
                 fragment = getSupportFragmentManager().findFragmentById(R.id.content);
             }
-
-            Log.d("Main activity", "onCreate: "+ fragment.getClass().getName());
             if (fragment == null) {
                 setdefaultNavigationSelected();
                 //fragment.setArguments(intentToFragmentArguments(getIntent()));
@@ -83,11 +81,6 @@ public class MainActivity extends AppCompatActivity
                 trans.replace(R.id.content, fragment);
                 trans.commit();
             }
-
-
-
-           // onNavigationItemSelected(navigationView.getMenu().getItem(navIndex));
-
         }
 
 

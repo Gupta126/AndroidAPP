@@ -229,10 +229,6 @@ public class ScenarioTwoFragment extends Fragment implements View.OnClickListene
                 city_name.add(location.getName());
             }
         }
-
-
-        Log.d(TAG, "setupAdapter: check what is null??" + city_name.toString()+"??"+ getContext());
-
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_dropdown_item, city_name);
 
