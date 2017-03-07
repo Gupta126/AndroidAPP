@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
@@ -61,8 +62,35 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // set default selection
-        setdefaultNavigationSelected();
+
+        if (savedInstanceState == null) {
+
+            // set default selection
+            setdefaultNavigationSelected();
+        } else {
+            Fragment fragment=null;
+            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+            if ( fragment == null ) {
+
+                fragment = getSupportFragmentManager().findFragmentById(R.id.content);
+            }
+
+            Log.d("Main activity", "onCreate: "+ fragment.getClass().getName());
+            if (fragment == null) {
+                setdefaultNavigationSelected();
+                //fragment.setArguments(intentToFragmentArguments(getIntent()));
+            }else {
+                trans.replace(R.id.content, fragment);
+                trans.commit();
+            }
+
+
+
+           // onNavigationItemSelected(navigationView.getMenu().getItem(navIndex));
+
+        }
+
+
     }
 
     private void setdefaultNavigationSelected() {
@@ -125,6 +153,7 @@ public class MainActivity extends AppCompatActivity
             //Replacing the main content with ContentFragment Which is our Inbox View;
             case R.id.nav_senario_one:
 
+                navIndex = 0;
                 ScenarioOneFragment sc_one_fragment = ScenarioOneFragment.newInstance();
 
                 fragmentTransaction.replace(R.id.content, sc_one_fragment);
@@ -135,6 +164,7 @@ public class MainActivity extends AppCompatActivity
 
             case R.id.nav_senario_two:
 
+                navIndex = 1;
                 ScenarioTwoFragment sc_two_fragment = ScenarioTwoFragment.newInstance();
 
                 fragmentTransaction.replace(R.id.content, sc_two_fragment);

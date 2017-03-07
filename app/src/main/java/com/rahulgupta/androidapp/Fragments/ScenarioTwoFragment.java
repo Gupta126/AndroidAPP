@@ -76,8 +76,6 @@ public class ScenarioTwoFragment extends Fragment implements View.OnClickListene
     public ScenarioTwoFragment() {
         // Required empty public constructor
         // initialise data
-        location_details = new ArrayList<Location>();
-        city_name = new ArrayList<String>();
     }
 
     /**
@@ -112,6 +110,9 @@ public class ScenarioTwoFragment extends Fragment implements View.OnClickListene
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+
+        location_details = new ArrayList<Location>();
+        city_name = new ArrayList<String>();
 
         setupUIComponent(view);
 
@@ -210,12 +211,12 @@ public class ScenarioTwoFragment extends Fragment implements View.OnClickListene
     }
 
     private void showpDialog() {
-        if (!pDialog.isShowing())
+        if (pDialog != null && !pDialog.isShowing())
             pDialog.show();
     }
 
     private void hidepDialog() {
-        if (pDialog.isShowing())
+        if (pDialog != null && pDialog.isShowing())
             pDialog.dismiss();
     }
 
@@ -228,6 +229,9 @@ public class ScenarioTwoFragment extends Fragment implements View.OnClickListene
                 city_name.add(location.getName());
             }
         }
+
+
+        Log.d(TAG, "setupAdapter: check what is null??" + city_name.toString()+"??"+ getContext());
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_dropdown_item, city_name);
@@ -263,8 +267,6 @@ public class ScenarioTwoFragment extends Fragment implements View.OnClickListene
 
         showpDialog();
 
-
-
         JsonArrayRequest req = new JsonArrayRequest(URL,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -273,7 +275,10 @@ public class ScenarioTwoFragment extends Fragment implements View.OnClickListene
                         Gson gson = new Gson();
                         location_details = gson.fromJson(response.toString(), new TypeToken<ArrayList<Location>>() {
                         }.getType());
-                        setupAdapter();
+
+                        if (getActivity() != null)
+                            setupAdapter();
+
                         hidepDialog();
                     }
                 }, new Response.ErrorListener() {
@@ -290,4 +295,9 @@ public class ScenarioTwoFragment extends Fragment implements View.OnClickListene
         AppController.getInstance().addToRequestQueue(req);
     }
 
+    @Override
+    public void onDestroyView() {
+        hidepDialog();
+        super.onDestroyView();
+    }
 }
